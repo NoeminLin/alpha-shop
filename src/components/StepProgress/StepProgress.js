@@ -29,13 +29,13 @@ function StepProgress() {
     phase: 'credit-card',
   }];
 
-  const stepItems = stepProgessArray.map((step, index) =>
-    <>
-      <StepItem {...step} index={index} key={'step-' + index} isActive={progress === index} />
-      {index !== stepProgessArray.length - 1 ?
-        <span className="progress-bar" key={'progress-bar-' + index}></span> : null}
-    </>
-  )
+  const stepItems = [];
+  stepProgessArray.forEach((step, index) => {
+    stepItems.push(<StepItem {...step} index={index} key={'step-' + index} isActive={progress === index} />)
+    if (index !== stepProgessArray.length - 1) {
+      stepItems.push(<span className="progress-bar" key={'progress-bar-' + index}></span>)
+    }
+  })
 
   return (
     <section className="progress-container col col-12">
