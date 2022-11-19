@@ -1,16 +1,27 @@
-// section
-// button-group
+
+function Button({ type }) {
+  return (<button className={type}>
+    {type === 'prev' && '上一步'}
+    {type === 'next' && '下一步'}
+    <svg className="cursor-point">
+      {/* <use xlink:href="#svg-icon-right-arrow"></use> */}
+    </svg>
+  </button>)
+}
+
+function ButtonGroup({ progressName, next, prev }) {
+  return (
+    <section className="button-group col col-12" data-phase={progressName}>
+      {prev && <Button type="prev" />}
+      {next && <Button type="next" />}
+    </section>
+  )
+}
 
 function Progress1() {
+  const progressName = "address"
   return (
-    <section className="button-group col col-12" data-phase="address">
-      <button className="next">
-        下一步
-        <svg className="cursor-point">
-          {/* <use xlink:href="#svg-icon-right-arrow"></use> */}
-        </svg>
-      </button>
-    </section>
+    <ButtonGroup progressName={progressName} next="ture" prev="false" />
   )
 }
 
