@@ -35,11 +35,11 @@ function Cart() {
             <div className="product-control-container">
               <div className="product-control">
                 <svg className="product-action minus">
-                  <use xlink:href="#svg-icon-minus"></use>
+                  {/* <use xlink:href="#svg-icon-minus"></use> */}
                 </svg>
                 <span className="product-count">0</span>
                 <svg className="product-action plus">
-                  <use xlink:href="#svg-icon-plus"></use>
+                  {/* <use xlink:href="#svg-icon-plus"></use> */}
                 </svg>
               </div>
             </div>
