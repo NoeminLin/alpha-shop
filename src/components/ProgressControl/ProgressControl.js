@@ -1,11 +1,13 @@
+import icons from './../../assets/icons/icons.svg'
 
 function Button({ type }) {
   return (<button className={type}>
     {type === 'prev' && '上一步'}
     {type === 'next' && '下一步'}
-    <svg className="cursor-point">
-      {/* <use xlink:href="#svg-icon-right-arrow"></use> */}
+    <svg className="cursor-point" >
+      <use xlinkHref={icons + "#svg-icon-right-arrow"}></use>
     </svg>
+
   </button>)
 }
 
@@ -30,14 +32,14 @@ function Progress1() {
 //     <section className="button-group col col-12" data-phase="shipping">
 //       <button className="prev">
 //         <svg className="cursor-point">
-//           {/* <use xlink:href="#svg-icon-left-arrow"></use> */}
+//           {/* <use xlinkHref="#svg-icon-left-arrow"></use> */}
 //         </svg>
 //         上一步
 //       </button>
 //       <button className="next">
 //         下一步
 //         <svg className="cursor-point">
-//           {/* <use xlink:href="#svg-icon-right-arrow"></use> */}
+//           {/* <use xlinkHref="#svg-icon-right-arrow"></use> */}
 //         </svg>
 //       </button>
 //     </section>
@@ -49,7 +51,7 @@ function Progress1() {
 //     <section className="button-group col col-12" data-phase="credit-card">
 //       <button className="prev">
 //         <svg className="cursor-point">
-//           {/* <use xlink:href="#svg-icon-left-arrow"></use> */}
+//           {/* <use xlinkHref="#svg-icon-left-arrow"></use> */}
 //         </svg>
 //         上一步
 //       </button>

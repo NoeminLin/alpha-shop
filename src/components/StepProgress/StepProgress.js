@@ -1,12 +1,14 @@
+import icons from './../../assets/icons/icons.svg'
+
 // 單一步驟
-function StepItem({ title, phase, index, isActive }) {
-  console.log('isActive', isActive);
+function StepItem({ title, phase, index, isActive, isFinish }) {
+  console.log('isActive', isActive)
   return (
     <span className="progress-group" key={phase}>
       <span className="progress-icon">
         <span className="text">{index + 1}</span>
-        <svg className={"icon " + isActive && 'cursor-point'}>
-          {/* <use xlink:href="#svg-icon-pg-complete"></use> */}
+        <svg className={"icon size-full " + isActive && 'cursor-point' } style={!isFinish && { display:'none' }}>
+          <use xlinkHref={icons + "#svg-icon-pg-complete"}></use>
         </svg>
       </span>
       <span className="progress-label">{title}</span>
@@ -27,9 +29,9 @@ function StepProgress() {
   {
     title: '付款資訊',
     phase: 'credit-card',
-  }];
+  }]
 
-  const stepItems = [];
+  const stepItems = []
   stepProgessArray.forEach((step, index) => {
     stepItems.push(<StepItem {...step} index={index} key={'step-' + index} isActive={progress === index} />)
     if (index !== stepProgessArray.length - 1) {
@@ -44,4 +46,4 @@ function StepProgress() {
   )
 }
 
-export default StepProgress;
+export default StepProgress

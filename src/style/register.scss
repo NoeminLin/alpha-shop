@@ -2,39 +2,48 @@
     .icon {
         display: inline-block;
     }
+
     .text {
         display: none;
     }
 }
+
 %undone-phase {
     .icon {
         display: none;
     }
+
     .text {
         display: inline-block;
     }
 }
+
 %current-text {
     color: var(--progress-current-color);
 }
+
 %current-icon {
     @extend %current-text;
     background-color: transparent;
     border: 1px solid var(--progress-current-color);
     @extend %undone-phase;
 }
+
 %undone-text {
     color: var(--progress-undone-color);
 }
+
 %undone-icon {
     @extend %undone-text;
     background-color: transparent;
     border: 1px solid var(--progress-undone-color);
     @extend %undone-phase;
 }
+
 %done-text {
     @extend %current-text;
 }
+
 %done-icon {
     color: var(--progress-done-color);
     background-color: transparent;
@@ -76,23 +85,26 @@ section.progress-container {
             height: 24px;
             margin-right: 8px;
             border-radius: 50%;
+            border: 1px solid #333;
 
             .text {
                 width: inherit;
                 height: inherit;
                 position: absolute;
-                top: 0px;
+                top: -2px;
                 font-size: 12px;
                 font-weight: 700;
                 line-height: 24px;
                 text-align: center;
                 color: inherit;
             }
+
             .icon {
                 width: inherit;
                 height: inherit;
             }
         }
+
         .progress-label {
             font-weight: 400;
             line-height: 24px;
@@ -101,53 +113,72 @@ section.progress-container {
     }
 }
 
-$phase-map: (1: 'address', 2: 'shipping', 3: 'credit-card');
+$phase-map: (
+    1: 'address',
+    2: 'shipping',
+    3: 'credit-card'
+);
+
 @for $index from 1 to 4 {
     section.register-container[data-phase="#{$index}"] {
+
         // progress-bar
         .progress-bar {
             &[data-order='1'] {
                 border-color: var(--done-progress-border);
             }
+
             &[data-order='2'] {
-                @if $index == 1 {
+                @if $index ==1 {
                     border-color: var(--undone-progress-border);
-                } @else {
+                }
+
+                @else {
                     border-color: var(--done-progress-border);
                 }
             }
         }
 
-        @each $key, $phase in $phase-map {
+        @each $key,
+        $phase in $phase-map {
+
             // progress-group
             .progress-group[data-phase="#{$phase}"] {
-                @if $key > $index {
+                @if $key >$index {
                     .progress-icon {
                         @extend %undone-icon;
                     }
+
                     .progress-label {
                         @extend %undone-text;
                     }
-                } @else if $key == $index {
+                }
+
+                @else if $key ==$index {
                     .progress-icon {
                         @extend %current-icon;
                     }
+
                     .progress-label {
                         @extend %current-text;
                     }
-                } @else {
+                }
+
+                @else {
                     .progress-icon {
                         @extend %done-icon;
                     }
+
                     .progress-label {
                         @extend %done-text;
                     }
                 }
 
-                @if $phase == 'address' {
+                @if $phase =='address' {
                     .progress-icon {
                         background-color: var(--pg-addr-bg-color);
                         border-color: var(--pg-addr-bg-color);
+
                         .text {
                             color: var(--pg-addr-color);
                         }
@@ -157,19 +188,23 @@ $phase-map: (1: 'address', 2: 'shipping', 3: 'credit-card');
 
             // form
             form[data-phase="#{$phase}"] {
-                @if $index == $key {
-                    display: flex;   
-                } @else {
+                @if $index ==$key {
+                    display: flex;
+                }
+
+                @else {
                     display: none;
                 }
             }
 
             // progress-control
-            & ~ section.progress-control-container {
+            &~section.progress-control-container {
                 .button-group[data-phase="#{$phase}"] {
-                    @if $index == $key {
-                        display: flex;   
-                    } @else {
+                    @if $index ==$key {
+                        display: flex;
+                    }
+
+                    @else {
                         display: none;
                     }
                 }
@@ -177,7 +212,7 @@ $phase-map: (1: 'address', 2: 'shipping', 3: 'credit-card');
         }
     }
 }
-    
+
 section.form-container {
     display: flex;
     margin-top: 64px;
@@ -206,8 +241,10 @@ section.form-body {
             color: var(--input-label);
             margin-bottom: 8px;
         }
+
         .select-container {
             position: relative;
+
             &::after {
                 position: absolute;
                 top: 50%;
@@ -222,7 +259,8 @@ section.form-body {
             }
         }
 
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 12px 16px;
             font-weight: 400;
@@ -233,9 +271,11 @@ section.form-body {
             border-radius: 4px;
             background-color: transparent;
         }
+
         input {
             color: var(--input-text);
         }
+
         select {
             color: var(--select-true);
             background-color: transparent;
@@ -243,6 +283,7 @@ section.form-body {
             &:required:invalid {
                 color: var(--select-false);
             }
+
             cursor: pointer;
             -webkit-appearance: none;
 
@@ -250,6 +291,7 @@ section.form-body {
                 &[value=""][disabled] {
                     display: none;
                 }
+
                 color: var(--select-true);
             }
         }
@@ -294,12 +336,15 @@ section.form-body {
             .col {
                 margin-bottom: 2px;
             }
+
             .text {
                 font-size: 14px;
                 font-weight: normal;
                 line-height: 20px;
             }
-            .price, .period {
+
+            .price,
+            .period {
                 font-size: 12px;
                 line-height: 16px;
             }
@@ -313,18 +358,20 @@ section.form-body {
             bottom: 0;
         }
 
-        input[type='radio'] ~ .radio-box-border {
+        input[type='radio']~.radio-box-border {
             border-radius: 4px;
             border: 1px solid #F0F0F5;
         }
-        input[type='radio']:checked ~ .radio-box-border {
+
+        input[type='radio']:checked~.radio-box-border {
             border: 1px solid #2A2A2A;
         }
 
-        #shipping-standard ~ .radio-info .shipping-text {
+        #shipping-standard~.radio-info .shipping-text {
             font-weight: normal;
         }
-        #shipping-dhl ~ .radio-info .shipping-text {
+
+        #shipping-dhl~.radio-info .shipping-text {
             font-weight: 700;
         }
     }
@@ -351,7 +398,7 @@ section.button-group {
         border-width: 0px;
         padding: 0px;
 
-        & > svg {
+        &>svg {
             width: 24px;
             height: 24px;
         }
@@ -362,10 +409,11 @@ section.button-group {
             font-weight: 400;
             color: #000000;
 
-            > svg {
+            >svg {
                 margin-right: 12px;
             }
         }
+
         &.next {
             justify-content: center;
             width: 174px;
@@ -375,7 +423,7 @@ section.button-group {
             color: #FFFFFF;
             margin-left: auto;
 
-            > svg {
+            >svg {
                 margin-left: 12px;
             }
         }
@@ -397,18 +445,22 @@ section.button-group {
                 }
             }
         }
+
         .progress-label {
             display: none;
         }
     }
+
     section.form-container {
         margin-top: 24px;
     }
+
     section.progress-control-container {
         position: relative;
         margin-top: 24px;
         margin-bottom: 40px;
     }
+
     section.button-group {
         button.next {
             width: 156px;

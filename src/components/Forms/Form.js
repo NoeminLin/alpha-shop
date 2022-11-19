@@ -1,4 +1,4 @@
-import { CityList } from "../../data/formsOptionList";
+import { CityList } from "../../data/formsOptionList"
 
 
 
