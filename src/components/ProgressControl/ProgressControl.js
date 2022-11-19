@@ -12,8 +12,8 @@ function Button({ type }) {
 function ButtonGroup({ progressName, next, prev }) {
   return (
     <section className="button-group col col-12" data-phase={progressName}>
-      {prev && <Button type="prev" />}
-      {next && <Button type="next" />}
+      {!!prev && <Button type="prev" />}
+      {!!next && <Button type="next" />}
     </section>
   )
 }
@@ -21,7 +21,7 @@ function ButtonGroup({ progressName, next, prev }) {
 function Progress1() {
   const progressName = "address"
   return (
-    <ButtonGroup progressName={progressName} next="ture" prev="false" />
+    <ButtonGroup progressName={progressName} next={true} prev={false} />
   )
 }
 
