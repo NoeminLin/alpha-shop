@@ -3,6 +3,7 @@
 AC學期3作業 - React專案練習
 
 ## 專案功能說明-簡易購物車頁面
+<img width="927" alt="截圖 2022-11-20 上午7 50 07" src="https://user-images.githubusercontent.com/55677877/202878007-fc94264c-aa22-43c2-a5f4-21f6f43f1c27.png">
 ### 結帳步驟
 - 進度條
 - 表單（寄送地址、運送方式、付款資訊）
