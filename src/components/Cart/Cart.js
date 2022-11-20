@@ -1,6 +1,5 @@
 import icons from './../../assets/icons/icons.svg'
-import { useState } from 'react'
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
 import { productListContext } from './CartContext.js'
 
 

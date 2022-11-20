@@ -1,9 +1,12 @@
 import { CityList, GenderList } from "../../data/FormsOptionList"
+import { useState, useContext } from "react"
+import { FormContext, StepContext } from "./FormContext.js"
 
 
-function Input({ type, placeholder }) {
+function Input({ id, type, placeholder, onChange }) {
+  console.log('id2', id)
   return (
-    <input type={type} placeholder={placeholder} />
+    <input type={type} placeholder={placeholder} id={id} onChange={onChange} />
   )
 }
 
@@ -22,26 +25,38 @@ function Select({ optionList, placeholder }) {
 
 function RadioGroup({ id, text, price, period }) {
   return (
-    <label class="radio-group col col-12" data-price="0">
+    <label className="radio-group col col-12" data-price="0">
       <input id={id} type="radio" name="shipping" checked="" onChange={() => { console.log(id) }} />
-      <div class="radio-info">
+      <div className="radio-info">
         <div className="col col-12">
-          <div class="text">{text}</div>
-          <div class="price">{price}</div>
+          <div className="text">{text}</div>
+          <div className="price">{price}</div>
         </div>
-        <div class="period col col-12">{period}</div>
+        <div className="period col col-12">{period}</div>
       </div>
-      <div class="radio-box-border"></div>
+      <div className="radio-box-border"></div>
     </label>
   )
 }
 
-function InputGroup({ className, label, tag, type, placeholder, optionList }) {
+function InputGroup({ id, className, label, tag, type, placeholder, optionList, onChange }) {
+  console.log('id1', id)
   return (
     <div className={className}>
       <div className="input-label">{label}</div>
-      {tag === 'input' && <Input type={type} placeholder={placeholder} />}
-      {tag === 'select' && <Select optionList={optionList} placeholder={placeholder} />}
+      {tag === 'input' &&
+        <Input
+          type={type}
+          placeholder={placeholder}
+          onChange={onChange}
+          id={id}
+        />}
+      {tag === 'select' &&
+        <Select
+          optionList={optionList}
+          placeholder={placeholder}
+          id={id}
+        />}
     </div>
   )
 }
@@ -61,6 +76,7 @@ function AddressForm() {
             label='稱謂'
             tag='select'
             optionList={GenderList}
+            id="displayName"
           />
           <InputGroup
             className={inputGroupClass('4', 's2')}
@@ -68,6 +84,7 @@ function AddressForm() {
             tag='input'
             type="text"
             placeholder="請輸入姓名"
+            id="name"
           />
         </div>
         <div className="col col-12">
@@ -77,6 +94,7 @@ function AddressForm() {
             tag='input'
             type="tel"
             placeholder="請輸入行動電話"
+            id="phone"
           />
           <InputGroup
             className={inputGroupClass('3', 'full')}
@@ -84,6 +102,7 @@ function AddressForm() {
             tag='input'
             type="email"
             placeholder="請輸入電子郵件"
+            id="email"
           />
         </div>
         <div className="col col-12">
@@ -93,6 +112,7 @@ function AddressForm() {
             tag='select'
             optionList={CityList}
             placeholder="請選擇縣市"
+            id="city"
           />
           <InputGroup
             className={inputGroupClass('4', 'full')}
@@ -100,6 +120,7 @@ function AddressForm() {
             tag='input'
             type="text"
             placeholder="請輸入地址"
+            id="address"
           />
         </div>
       </section>
@@ -109,9 +130,9 @@ function AddressForm() {
 
 function ShippingForm() {
   return (
-    <form class="col col-12" data-phase="shipping">
-      <h3 class="form-title">運送方式</h3>
-      <section class="form-body col col-12">
+    <form className="col col-12" data-phase="shipping">
+      <h3 className="form-title">運送方式</h3>
+      <section className="form-body col col-12">
         <RadioGroup id="shipping-standard" text="標準運送" price="免費" period="約 3~7 個工作天" />
         <RadioGroup id="shipping-dhl" text="DHL 貨運" price="$500" period="48 小時內送達" />
       </section>
@@ -120,45 +141,67 @@ function ShippingForm() {
 }
 
 function CreditCardForm() {
+  const initFormData = useContext(FormContext);
+  const [formData, setFormData] = useState(initFormData);
+
+  function handleChange(e) {
+    const id = e.target.id
+    const newFormData = { ...formData }
+    newFormData[id] = e.target.value
+    console.log(id, e.target.value)
+    setFormData(newFormData)
+  }
+
   return (
-    <form class="col col-12" data-phase="credit-card">
-      <h3 class="form-title">付款資訊</h3>
-      <section class="form-body col col-12">
-        <div className="col col-12">
-          <InputGroup
-            className={inputGroupClass('4', 'full')}
-            label='持卡人姓名'
-            tag='input'
-            type="text"
-            placeholder="John Doe"
-          />
-        </div>
-        <div className="col col-12">
-          <InputGroup
-            className={inputGroupClass('4', 'full')}
-            label='卡號'
-            tag='input'
-            type="text"
-            placeholder="1111 2222 3333 4444"
-          />
-        </div>
-        <div className="col col-12">
-          <InputGroup
-            className={inputGroupClass('3', 's3')}
-            label='有效期限'
-            tag='input'
-            type="text"
-            placeholder="MM/YY"
-          />
-          <InputGroup
-            className={inputGroupClass('3', 's3')}
-            label='CVC / CCV'
-            tag='input'
-            type="text"
-            placeholder="123"
-          />
-        </div>
-      </section>
+    <form className="col col-12" data-phase="credit-card">
+      <h3 className="form-title">付款資訊</h3>
+      <FormContext.Provider value={formData}>
+        <p>{JSON.stringify(formData)}</p>
+        <section className="form-body col col-12">
+          <div className="col col-12">
+            <InputGroup
+              className={inputGroupClass('4', 'full')}
+              label='持卡人姓名'
+              tag='input'
+              type="text"
+              placeholder="John Doe"
+              id="cardOwner"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col col-12">
+            <InputGroup
+              className={inputGroupClass('4', 'full')}
+              label='卡號'
+              tag='input'
+              type="text"
+              placeholder="1111 2222 3333 4444"
+              id="cardNumber"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col col-12">
+            <InputGroup
+              className={inputGroupClass('3', 's3')}
+              label='有效期限'
+              tag='input'
+              type="text"
+              placeholder="MM/YY"
+              id="validityPeriod"
+              onChange={handleChange}
+            />
+            <InputGroup
+              className={inputGroupClass('3', 's3')}
+              label='CVC / CCV'
+              tag='input'
+              type="text"
+              placeholder="123"
+              id="CVCorCCV"
+              onChange={handleChange}
+            />
+          </div>
+        </section>
+      </FormContext.Provider>
     </form>
   )
 }

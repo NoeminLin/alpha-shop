@@ -1,13 +1,14 @@
 import './style/main.scss'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import StepProgress from './components/StepProgress/StepProgress'
 import Forms from './components/Forms/Form'
 import ProgressControl from './components/ProgressControl/ProgressControl'
 import Cart from './components/Cart/Cart'
-import React from 'react';
+import { FormContext } from './components/Forms/FormContext'
 
 function App() {
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(0);
+  const formData = useContext(FormContext);
 
   function handleStepChange(e) {
     const isSubmut = e.target.parentElement.classList.contains('submit') ||
@@ -17,7 +18,7 @@ function App() {
     const isPrev = e.target.parentElement.classList.contains('prev') ||
       e.target.classList.contains('prev')
     if (isSubmut) {
-      alert('送出訂單！')
+      console.log(JSON.stringify(formData));
       setStep(0);
     } else if (isNext) {
       setStep(step + 1);
@@ -25,6 +26,7 @@ function App() {
       setStep(step - 1);
     }
   }
+
   return (
     <main className="site-main">
       <div className="main-container">
