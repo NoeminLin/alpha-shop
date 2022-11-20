@@ -20,6 +20,22 @@ function Select({ optionList, placeholder }) {
   )
 }
 
+function RadioGroup({ id, text, price, period }) {
+  return (
+    <label class="radio-group col col-12" data-price="0">
+      <input id={id} type="radio" name="shipping" checked="" onChange={() => { console.log(id) }} />
+      <div class="radio-info">
+        <div className="col col-12">
+          <div class="text">{text}</div>
+          <div class="price">{price}</div>
+        </div>
+        <div class="period col col-12">{period}</div>
+      </div>
+      <div class="radio-box-border"></div>
+    </label>
+  )
+}
+
 function InputGroup({ className, label, tag, type, placeholder, optionList }) {
   return (
     <div className={className}>
@@ -36,7 +52,7 @@ function inputGroupClass(largeSize, smSize) {
 
 function AddressForm() {
   return (
-    <form className="col col-12" data-phase="address">
+    <form className="col col-12">
       <h3 className="form-title">寄送地址</h3>
       <section className="form-body col col-12">
         <div className="col col-12">
@@ -91,10 +107,69 @@ function AddressForm() {
   )
 }
 
-function Forms() {
+function ShippingForm() {
+  return (
+    <form class="col col-12" data-phase="shipping">
+      <h3 class="form-title">運送方式</h3>
+      <section class="form-body col col-12">
+        <RadioGroup id="shipping-standard" text="標準運送" price="免費" period="約 3~7 個工作天" />
+        <RadioGroup id="shipping-dhl" text="DHL 貨運" price="$500" period="48 小時內送達" />
+      </section>
+    </form>
+  )
+}
+
+function CreditCardForm() {
+  return (
+    <form class="col col-12" data-phase="credit-card">
+      <h3 class="form-title">付款資訊</h3>
+      <section class="form-body col col-12">
+        <div className="col col-12">
+          <InputGroup
+            className={inputGroupClass('4', 'full')}
+            label='持卡人姓名'
+            tag='input'
+            type="text"
+            placeholder="John Doe"
+          />
+        </div>
+        <div className="col col-12">
+          <InputGroup
+            className={inputGroupClass('4', 'full')}
+            label='卡號'
+            tag='input'
+            type="text"
+            placeholder="1111 2222 3333 4444"
+          />
+        </div>
+        <div className="col col-12">
+          <InputGroup
+            className={inputGroupClass('3', 's3')}
+            label='有效期限'
+            tag='input'
+            type="text"
+            placeholder="MM/YY"
+          />
+          <InputGroup
+            className={inputGroupClass('3', 's3')}
+            label='CVC / CCV'
+            tag='input'
+            type="text"
+            placeholder="123"
+          />
+        </div>
+      </section>
+    </form>
+  )
+}
+
+function Forms({ step }) {
+  console.log(step);
   return (
     <section className="form-container col col-12">
-      <AddressForm />
+      {step === 0 && < AddressForm />}
+      {step === 1 && < ShippingForm />}
+      {step === 2 && < CreditCardForm />}
     </section>
   )
 }
