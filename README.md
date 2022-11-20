@@ -9,6 +9,7 @@ AC學期3作業 - React專案練習
 ### 購物車頁面
 - 產品列表
 - 數量加總
+### 參考頁面樣式
 <img width="927" alt="截圖 2022-11-20 上午7 50 07" src="https://user-images.githubusercontent.com/55677877/202878007-fc94264c-aa22-43c2-a5f4-21f6f43f1c27.png">
 
 ## 專案建置環境
