@@ -1,6 +1,6 @@
 import icons from './../../assets/icons/icons.svg'
 import { useState, useContext } from 'react'
-import { productListContext } from './CartContext.js'
+import { ProductListContext, TotalPriceContext } from './CartContext.js'
 
 
 function CountButton({ type, onClick, id }) {
@@ -46,9 +46,11 @@ function CartInfo({ title, value }) {
 }
 
 function Cart() {
-  const productListInit = useContext(productListContext)
-
+  const productListInit = useContext(ProductListContext)
   const [productList, setProductList] = useState(productListInit)
+  const totalPriceContext = useContext(TotalPriceContext)
+  console.log('totalPriceContext:', totalPriceContext)
+
 
   function handleProductQuantity(e) {
     const id = e.target.id
@@ -70,6 +72,7 @@ function Cart() {
     productList.forEach(prod => {
       total += prod.price * prod.quantity
     });
+    totalPriceContext.updateTotalPrice(total)
     return total
   }
 

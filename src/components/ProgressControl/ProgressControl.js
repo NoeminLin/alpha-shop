@@ -1,4 +1,9 @@
 import icons from './../../assets/icons/icons.svg'
+import { useContext } from 'react'
+import { StepContext, FormContext } from './../Forms/FormContext'
+import { TotalPriceContext } from '../Cart/CartContext'
+
+
 
 function Button({ type, onClick, submit }) {
   return (<button className={type + ' ' + (submit && 'submit')} onClick={onClick}>
@@ -25,7 +30,6 @@ function ButtonGroup({ progressName, next, prev, submit, onClick }) {
 }
 
 function Step({ step, onClick }) {
-  console.log('PC step:', step)
   const stepProgessArray = [{
     title: '寄送地址',
     phase: 'address',
@@ -56,10 +60,34 @@ function Step({ step, onClick }) {
 }
 
 
-function ProgressControl({ step, onClick }) {
+function ProgressControl() {
+  const stepContext = useContext(StepContext)
+  const formContext = useContext(FormContext)
+  const totalPriceContext = useContext(TotalPriceContext)
+
+  function handleStepChange(e) {
+    const isSubmut = e.target.parentElement.classList.contains('submit') ||
+      e.target.classList.contains('submit')
+    const isNext = e.target.parentElement.classList.contains('next') ||
+      e.target.classList.contains('next')
+    const isPrev = e.target.parentElement.classList.contains('prev') ||
+      e.target.classList.contains('prev')
+    if (isSubmut) {
+      console.log({
+        ...formContext.data,
+        totalPrice: totalPriceContext.totalPrice
+      })
+      // stepContext.updateStep(0);
+    } else if (isNext) {
+      stepContext.updateStep(stepContext.step + 1);
+    } else if (isPrev) {
+      stepContext.updateStep(stepContext.step - 1);
+    }
+  }
+
   return (
     <section className="progress-control-container col col-lg-6 col-sm-12">
-      <Step step={step} onClick={onClick} />
+      <Step step={stepContext.step} onClick={handleStepChange} />
     </section>
   )
 }

@@ -1,6 +1,6 @@
 import { CityList, GenderList } from "../../data/FormsOptionList"
-import { useState, useContext } from "react"
-import { FormContext, StepContext } from "./FormContext.js"
+import { useContext } from "react"
+import { FormContext } from "./FormContext.js"
 
 
 function Input({ id, type, placeholder, onChange }) {
@@ -141,67 +141,64 @@ function ShippingForm() {
 }
 
 function CreditCardForm() {
-  const initFormData = useContext(FormContext);
-  const [formData, setFormData] = useState(initFormData);
+  const formContext = useContext(FormContext);
 
   function handleChange(e) {
+    const newFormData = { ...formContext.data }
     const id = e.target.id
-    const newFormData = { ...formData }
     newFormData[id] = e.target.value
-    console.log(id, e.target.value)
-    setFormData(newFormData)
+    // console.log(id, e.target.value)
+    console.log(newFormData)
+    formContext.updateFormData(newFormData)
   }
 
   return (
     <form className="col col-12" data-phase="credit-card">
       <h3 className="form-title">付款資訊</h3>
-      <FormContext.Provider value={formData}>
-        <p>{JSON.stringify(formData)}</p>
-        <section className="form-body col col-12">
-          <div className="col col-12">
-            <InputGroup
-              className={inputGroupClass('4', 'full')}
-              label='持卡人姓名'
-              tag='input'
-              type="text"
-              placeholder="John Doe"
-              id="cardOwner"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="col col-12">
-            <InputGroup
-              className={inputGroupClass('4', 'full')}
-              label='卡號'
-              tag='input'
-              type="text"
-              placeholder="1111 2222 3333 4444"
-              id="cardNumber"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="col col-12">
-            <InputGroup
-              className={inputGroupClass('3', 's3')}
-              label='有效期限'
-              tag='input'
-              type="text"
-              placeholder="MM/YY"
-              id="validityPeriod"
-              onChange={handleChange}
-            />
-            <InputGroup
-              className={inputGroupClass('3', 's3')}
-              label='CVC / CCV'
-              tag='input'
-              type="text"
-              placeholder="123"
-              id="CVCorCCV"
-              onChange={handleChange}
-            />
-          </div>
-        </section>
-      </FormContext.Provider>
+      <section className="form-body col col-12">
+        <div className="col col-12">
+          <InputGroup
+            className={inputGroupClass('4', 'full')}
+            label='持卡人姓名'
+            tag='input'
+            type="text"
+            placeholder="John Doe"
+            id="cardOwner"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col col-12">
+          <InputGroup
+            className={inputGroupClass('4', 'full')}
+            label='卡號'
+            tag='input'
+            type="text"
+            placeholder="1111 2222 3333 4444"
+            id="cardNumber"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col col-12">
+          <InputGroup
+            className={inputGroupClass('3', 's3')}
+            label='有效期限'
+            tag='input'
+            type="text"
+            placeholder="MM/YY"
+            id="validityPeriod"
+            onChange={handleChange}
+          />
+          <InputGroup
+            className={inputGroupClass('3', 's3')}
+            label='CVC / CCV'
+            tag='input'
+            type="text"
+            placeholder="123"
+            id="CVCorCCV"
+            onChange={handleChange}
+          />
+        </div>
+      </section>
     </form>
   )
 }
