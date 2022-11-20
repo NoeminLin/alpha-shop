@@ -1,4 +1,4 @@
-import { CityList, GenderList } from "../../data/formsOptionList"
+import { CityList, GenderList } from "../../data/FormsOptionList"
 
 
 function Input({ type, placeholder }) {
