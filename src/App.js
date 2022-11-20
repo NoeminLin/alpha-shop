@@ -1,8 +1,9 @@
-import './style/main.scss';
-import StepProgress from './components/StepProgress/StepProgress';
-import Forms from './components/Forms/Form';
-import ProgressControl from './components/ProgressControl/ProgressControl';
-import Cart from './components/Cart/Cart';
+import './style/main.scss'
+import StepProgress from './components/StepProgress/StepProgress'
+import Forms from './components/Forms/Form'
+import ProgressControl from './components/ProgressControl/ProgressControl'
+import Cart from './components/Cart/Cart'
+import React from 'react';
 
 function App() {
   return (
@@ -20,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
