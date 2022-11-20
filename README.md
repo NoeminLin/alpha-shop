@@ -22,8 +22,8 @@ AC學期3作業 - React專案練習
 指令 `npm intall`
 
 ### 在本地端環境實行專案
-指令 `npm start` 會成為開發者模式
-在本地端運行專案可在瀏覽器觀看目前網頁開發進度 [http://localhost:3000](http://localhost:3000)
+指令 `npm start` 
+在本地端運行專案，並可至瀏覽器觀看目前專案網頁開發進度 [http://localhost:3000](http://localhost:3000)
 
 ## 資料夾說明
 ```
