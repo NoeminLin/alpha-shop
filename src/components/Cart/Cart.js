@@ -1,5 +1,6 @@
 import icons from './../../assets/icons/icons.svg'
 
+
 function CountButton({ type }) {
   <svg className={"product-action " + type}>
     <use xlinkHref={icons + "#svg-icon-" + type}></use>
