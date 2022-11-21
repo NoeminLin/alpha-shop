@@ -2,7 +2,6 @@ import icons from './../../assets/icons/icons.svg'
 
 // 單一步驟
 function StepItem({ title, phase, index, isActive, isFinish }) {
-  console.log('isActive', isActive)
   return (
     <span className={`progress-group ${isActive ? 'active' : ''} ${isFinish ? 'finish' : ''}`} key={phase}>
       <span className="progress-icon">
