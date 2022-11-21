@@ -4,7 +4,6 @@ import { FormContext } from "./FormContext.jsx"
 
 
 function Input({ id, type, placeholder, onChange }) {
-  console.log('id2', id)
   return (
     <input type={type} placeholder={placeholder} id={id} onChange={onChange} />
   )
@@ -40,7 +39,6 @@ function RadioGroup({ id, text, price, period }) {
 }
 
 function InputGroup({ id, className, label, tag, type, placeholder, optionList, onChange }) {
-  console.log('id1', id)
   return (
     <div className={className}>
       <div className="input-label">{label}</div>

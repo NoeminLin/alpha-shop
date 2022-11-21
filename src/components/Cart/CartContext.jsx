@@ -16,6 +16,5 @@ const productListInit = [
   },
 ]
 const ProductListContext = createContext(productListInit)
-const TotalPriceContext = createContext()
 
-export { ProductListContext, TotalPriceContext }
+export { ProductListContext, productListInit }

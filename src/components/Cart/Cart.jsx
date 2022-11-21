@@ -1,6 +1,6 @@
 import icons from './../../assets/icons/icons.svg'
-import { useState, useContext } from 'react'
-import { ProductListContext, TotalPriceContext } from './CartContext.jsx'
+import { useContext } from 'react'
+import { ProductListContext } from './CartContext.jsx'
 
 
 function CountButton({ type, onClick, id }) {
@@ -45,17 +45,21 @@ function CartInfo({ title, value }) {
   )
 }
 
-function Cart() {
-  const productListInit = useContext(ProductListContext)
-  const [productList, setProductList] = useState(productListInit)
-  const totalPriceContext = useContext(TotalPriceContext)
-  console.log('totalPriceContext:', totalPriceContext)
+export function countTotal(productList) {
+  let total = 0;
+  productList.forEach(prod => {
+    total += prod.price * prod.quantity
+  });
+  return total
+}
 
+function Cart() {
+  const productListContext = useContext(ProductListContext)
 
   function handleProductQuantity(e) {
     const id = e.target.id
     const type = e.target.getAttribute('type')
-    const newProductList = productList.map(prod => {
+    const newProductList = productListContext.productList.map(prod => {
       if (prod.id === id) {
         const newProd = { ...prod }
         const newQuantity = newProd.quantity + (type === 'minus' ? (-1) : 1)
@@ -65,16 +69,9 @@ function Cart() {
         return { ...prod }
       }
     });
-    setProductList(newProductList)
+    productListContext.updateProductList(newProductList)
   }
-  function countTotal(productList) {
-    let total = 0;
-    productList.forEach(prod => {
-      total += prod.price * prod.quantity
-    });
-    totalPriceContext.updateTotalPrice(total)
-    return total
-  }
+
 
   return (
     <section className="cart-container col col-lg-5 col-sm-12" data-total-price="0">
@@ -82,14 +79,14 @@ function Cart() {
 
       <section className="product-list col col-12" data-total-price="0">
         {
-          productList.map(prod =>
+          productListContext.productList.map(prod =>
             <Product {...prod} key={prod.id + '-' + prod.name} onClick={handleProductQuantity} />
           )
         }
       </section>
 
       <CartInfo title={"運費"} value={"免費"} />
-      <CartInfo title={"小計"} value={"$ " + countTotal(productList)} />
+      <CartInfo title={"小計"} value={"$ " + countTotal(productListContext.productList)} />
     </section>
   )
 }

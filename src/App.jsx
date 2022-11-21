@@ -5,12 +5,12 @@ import Forms from './components/Forms/Form'
 import ProgressControl from './components/ProgressControl/ProgressControl'
 import Cart from './components/Cart/Cart'
 import { FormContext, StepContext, initFormData } from './components/Forms/FormContext'
-import { TotalPriceContext } from './components/Cart/CartContext'
+import { productListInit, ProductListContext } from './components/Cart/CartContext'
 
 function App() {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState(initFormData);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [productList, setProductList] = useState(productListInit)
 
 
   return (
@@ -22,12 +22,12 @@ function App() {
             <StepProgress step={step} />
             <Forms step={step} />
           </section>
-          <TotalPriceContext.Provider value={{ totalPrice: totalPrice, updateTotalPrice: setTotalPrice }}>
+          <ProductListContext.Provider value={{ productList: productList, updateProductList: setProductList }}>
             <StepContext.Provider value={{ step: step, updateStep: setStep }}>
               <Cart />
               <ProgressControl />
             </StepContext.Provider>
-          </TotalPriceContext.Provider>
+          </ProductListContext.Provider>
         </FormContext.Provider>
       </div>
     </main>
