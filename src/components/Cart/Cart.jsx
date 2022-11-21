@@ -1,6 +1,6 @@
 import icons from './../../assets/icons/icons.svg'
 import { useState, useContext } from 'react'
-import { ProductListContext, TotalPriceContext } from './CartContext.js'
+import { ProductListContext, TotalPriceContext } from './CartContext.jsx'
 
 
 function CountButton({ type, onClick, id }) {

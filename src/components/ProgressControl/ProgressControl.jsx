@@ -1,6 +1,6 @@
 import icons from './../../assets/icons/icons.svg'
 import { useContext } from 'react'
-import { StepContext, FormContext } from './../Forms/FormContext'
+import { StepContext, FormContext } from '../Forms/FormContext'
 import { TotalPriceContext } from '../Cart/CartContext'
 
 

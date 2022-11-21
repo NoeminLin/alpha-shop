@@ -1,6 +1,6 @@
 import { CityList, GenderList } from "../../data/FormsOptionList"
 import { useContext } from "react"
-import { FormContext } from "./FormContext.js"
+import { FormContext } from "./FormContext.jsx"
 
 
 function Input({ id, type, placeholder, onChange }) {
