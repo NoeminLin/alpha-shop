@@ -23,7 +23,6 @@ function App() {
             <Forms step={step} />
           </section>
           <TotalPriceContext.Provider value={{ totalPrice: totalPrice, updateTotalPrice: setTotalPrice }}>
-            <p>{totalPrice}</p>
             <StepContext.Provider value={{ step: step, updateStep: setStep }}>
               <Cart />
               <ProgressControl />
