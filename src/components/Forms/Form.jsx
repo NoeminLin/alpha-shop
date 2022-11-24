@@ -25,6 +25,7 @@ function Select({ optionList, placeholder }) {
 function RadioGroup({ id, text, price, period }) {
   return (
     <label className="radio-group col col-12" data-price="0">
+      <input id={id} type="radio" name="shipping"  />
       <div className="radio-info">
         <div className="col col-12">
           <div className="text">{text}</div>
