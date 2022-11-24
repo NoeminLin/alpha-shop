@@ -1,6 +1,7 @@
 import icons from './../../assets/icons/icons.svg'
 import { useContext } from 'react'
 import { ProductListContext } from './CartContext.jsx'
+import { FormContext } from './../Forms/FormContext'
 
 
 function CountButton({ type, onClick, id }) {
@@ -55,6 +56,7 @@ export function countTotal(productList) {
 
 function Cart() {
   const productListContext = useContext(ProductListContext)
+  const formContext = useContext(FormContext);
 
   function handleProductQuantity(e) {
     const id = e.target.id
@@ -70,6 +72,7 @@ function Cart() {
       }
     });
     productListContext.updateProductList(newProductList)
+    formContext.updateFormData({ ...formContext.data, total: countTotal(newProductList) })
   }
 
 

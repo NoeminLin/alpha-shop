@@ -5,6 +5,7 @@ const initFormData = {
   cardNumber: null,
   validityPeriod: null,
   CVCorCCV: null,
+  total: 0
 }
 
 const FormContext = createContext()

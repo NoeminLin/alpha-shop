@@ -1,8 +1,8 @@
 import icons from './../../assets/icons/icons.svg'
 import { useContext } from 'react'
 import { StepContext, FormContext } from '../Forms/FormContext'
-import { ProductListContext } from '../Cart/CartContext'
-import { countTotal } from '../Cart/Cart.jsx'
+// import { ProductListContext } from '../Cart/CartContext'
+// import { countTotal } from '../Cart/Cart.jsx'
 
 
 
@@ -64,7 +64,7 @@ function Step({ step, onClick }) {
 function ProgressControl() {
   const stepContext = useContext(StepContext)
   const formContext = useContext(FormContext)
-  const productListContext = useContext(ProductListContext)
+  // const productListContext = useContext(ProductListContext)
 
   function handleStepChange(e) {
     const isSubmut = e.target.parentElement.classList.contains('submit') ||
@@ -73,11 +73,10 @@ function ProgressControl() {
       e.target.classList.contains('next')
     const isPrev = e.target.parentElement.classList.contains('prev') ||
       e.target.classList.contains('prev')
-    const totaltotalPrice = countTotal(productListContext.productList)
+    // const totaltotalPrice = countTotal(productListContext.productList)
     if (isSubmut) {
       console.log({
         ...formContext.data,
-        totalPrice: totaltotalPrice
       })
     } else if (isNext) {
       stepContext.updateStep(stepContext.step + 1);
